@@ -1,27 +1,12 @@
-def fibonacci(n):
-    if n < 2:
-        return n
-    return fibonacci(n-1)+fibonacci(n-2)
+def fibonacci_dynamic(n):
+    memory = {}
 
+    def memorized_fibonacci(a):
+        if a in memory:
+            return memory[a]
+        if a < 2:
+            return a
+        memory[a] = memorized_fibonacci(a - 1) + memorized_fibonacci(a - 2)
+        return memory[a]
 
-memory = {}
-
-
-def memorized_fibonacci(n):
-
-    found = False
-
-    if (n - 1 and n - 2) in memory:
-        memory[n] = memory[n - 1] + memory[n - 2]
-        found = True
-    else:
-        if n - 1 in memory:
-            memory[n] = memory[n - 1] + fibonacci(n - 2)
-            found = True
-        if n - 2 in memory:
-            memory[n] = fibonacci(n - 1) + memory[n - 2]
-            found = True
-    if not found:
-        memory[n] = fibonacci(n)
-
-    return memory[n]
+    return memorized_fibonacci(n)
