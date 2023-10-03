@@ -1,0 +1,27 @@
+def fibonacci(n):
+    if n < 2:
+        return n
+    return fibonacci(n-1)+fibonacci(n-2)
+
+
+memory = {}
+
+
+def memorized_fibonacci(n):
+
+    found = False
+
+    if (n - 1 and n - 2) in memory:
+        memory[n] = memory[n - 1] + memory[n - 2]
+        found = True
+    else:
+        if n - 1 in memory:
+            memory[n] = memory[n - 1] + fibonacci(n - 2)
+            found = True
+        if n - 2 in memory:
+            memory[n] = fibonacci(n - 1) + memory[n - 2]
+            found = True
+    if not found:
+        memory[n] = fibonacci(n)
+
+    return memory[n]
